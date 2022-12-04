@@ -5,12 +5,12 @@ class QueryBuilder
     private static $instance = null;
     private static $pdo;
 
-    public function __construct()
+    private function __construct()
     {
         self::$pdo = Connection::getInstance()->pdo();
     }
 
-    public static function getInstance()
+    private static function getInstance()
     {
         if (!isset(self::$instance)) {
 
