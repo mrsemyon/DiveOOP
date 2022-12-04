@@ -66,7 +66,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
                                 <div class="card p-4 rounded-plus bg-faded">
                                     <?php if (Session::exists('danger')) : ?>
                                         <div class="alert alert-danger text-dark" role="alert">
-                                            <?php Session::flash('danger') ?>
+                                            <?= Session::flash('danger') ?>
                                         </div>
                                     <?php endif ?>
                                     <form id="js-login" novalidate="" action="/controllers/registration.php" method="POST">

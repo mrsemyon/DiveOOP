@@ -19,6 +19,6 @@ QueryBuilder::create(
 Session::put('email', $_POST['email']);
 Session::put('role', 'user');
 
-Session::put('success', 'Вы успешно зарегистрированы.');
+Session::flash('success', 'Вы успешно зарегистрированы.');
 Redirect::to('/public/users');
 exit;
