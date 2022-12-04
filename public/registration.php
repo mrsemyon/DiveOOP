@@ -72,7 +72,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
                                     <form id="js-login" novalidate="" action="/controllers/registration.php" method="POST">
                                         <div class="form-group">
                                             <label class="form-label" for="emailverify">Email</label>
-                                            <input name="email" type="email" id="emailverify" class="form-control" value="<?= Input::get('email') ?>" required>
+                                            <input name="email" type="email" id="emailverify" class="form-control" required>
                                             <div class=" invalid-feedback">Заполните поле.
                                             </div>
                                             <div class="help-block">Эл. адрес будет вашим логином при авторизации</div>
@@ -92,7 +92,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
                                                 <button id="js-login-btn" type="submit" class="btn btn-block btn-danger btn-lg mt-3">Регистрация</button>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="token" value="<?= Token::generate() ?>">
+                                        <input type="hidden" name="token">
                                     </form>
                                 </div>
                             </div>
