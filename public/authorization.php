@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>
@@ -23,6 +24,7 @@
     <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="stylesheet" media="screen, print" href="css/page-login-alt.css">
 </head>
+
 <body>
     <div class="blankpage-form-field">
         <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
@@ -36,18 +38,18 @@
             <div class="alert alert-success">
                 Регистрация успешна
             </div>
-            <form action="">
+            <form action="/controllers/authorization.php" method="POST">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
-                    <input type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
+                    <input name="email" type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="password">Пароль</label>
-                    <input type="password" id="password" class="form-control" placeholder="" >
+                    <input name="password" type="password" id="password" class="form-control" placeholder="">
                 </div>
                 <div class="form-group text-left">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="rememberme">
+                        <input name="checkbox" type="checkbox" class="custom-control-input" id="rememberme">
                         <label class="custom-control-label" for="rememberme">Запомнить меня</label>
                     </div>
                 </div>
@@ -64,4 +66,5 @@
     </video>
     <script src="js/vendors.bundle.js"></script>
 </body>
+
 </html>
