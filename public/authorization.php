@@ -1,3 +1,6 @@
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,9 +38,11 @@
             </a>
         </div>
         <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
-            <div class="alert alert-success">
-                Регистрация успешна
-            </div>
+            <?php if (Session::exists('danger')) : ?>
+                <div class="alert alert-danger text-dark" role="alert">
+                    <?= Session::flash('danger') ?>
+                </div>
+            <?php endif ?>
             <form action="/controllers/authorization.php" method="POST">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
@@ -57,7 +62,7 @@
             </form>
         </div>
         <div class="blankpage-footer text-center">
-            Нет аккаунта? <a href="page_register.html"><strong>Зарегистрироваться</strong>
+            Нет аккаунта? <a href="/public/registration.php"><strong>Зарегистрироваться</strong>
         </div>
     </div>
     <video poster="img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
