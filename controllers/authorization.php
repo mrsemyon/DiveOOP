@@ -1,11 +1,11 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
-$user = QueryBuilder::read('users', ['email' => $_POST['email']]);
+$user = QueryBuilder::getInstance()->read('users', ['email' => $_POST['email']]);
 
 if (!empty($user) && password_verify($_POST['password'], $user['password'])) {
     Session::put('email', $_POST['email']);
-    Session::put('role', 'user');
+    Session::put('role', $user['role']);
     Session::flash('success', 'Авторизация прошла успешно.');
     Redirect::to('/public/users');
     exit;
