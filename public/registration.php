@@ -1,5 +1,12 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
+
+if (Session::exists('email')) {
+    Session::flash('success', 'Вы уже зарегистрированы.');
+    Redirect::to('/public/users');
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
