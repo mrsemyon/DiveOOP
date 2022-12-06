@@ -41,9 +41,16 @@ $users = QueryBuilder::getInstance()->read('users');
     </nav>
 
     <main id="js-page-content" role="main" class="page-content mt-3">
-        <div class="alert alert-success">
-            Профиль успешно обновлен.
-        </div>
+        <?php if (Session::exists('danger')) : ?>
+            <div class="alert alert-danger text-dark" role="alert">
+                <?= Session::flash('danger') ?>
+            </div>
+        <?php endif; ?>
+        <?php if (Session::exists('success')) : ?>
+            <div class="alert alert-success text-dark" role="alert">
+                <?= Session::flash('success') ?>
+            </div>
+        <?php endif; ?>
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-users'></i> Список пользователей
