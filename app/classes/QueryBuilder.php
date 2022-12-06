@@ -47,4 +47,17 @@ class QueryBuilder
         $statement->execute($data);
         return self::$pdo->lastInsertId();
     }
+
+    public function update(string $table, $data, $where)
+    {
+        $sql = "UPDATE $table SET ";
+        foreach ($data as $key => $value) {
+            $sql .= $key . '= :' . $key . ', ';
+        }
+        $sql = rtrim($sql, ', ') . ' WHERE ';
+        $key = implode(array_keys($where));
+        $sql .= $key . '= :' . $key . ';';
+        $statement = self::$pdo->prepare($sql);
+        $statement->execute(array_merge($data, $where));
+    }
 }
