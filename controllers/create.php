@@ -18,7 +18,7 @@ $id = QueryBuilder::getInstance()->create(
 
 $photo = (!empty($_FILES['photo']['name']))
     ? prepareUserPhoto($_FILES['photo'])
-    : 'no_photo.jpg';
+    : 'no_photo.png';
 
 QueryBuilder::getInstance()->update(
     'users',
