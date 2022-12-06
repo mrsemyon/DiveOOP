@@ -3,7 +3,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
 if (!empty(QueryBuilder::getInstance()->read('users', ['email' => $_POST['email']]))) {
     Session::flash('danger', 'Этот эл. адрес уже занят другим пользователем.');
-    Redirect::to('/public/registration');
+    Redirect::to('/public/create');
     exit;
 }
 
