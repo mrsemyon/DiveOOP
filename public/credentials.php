@@ -1,8 +1,9 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
-$title = 'Редактировать авторизационные данные';
+$user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
 
+$title = 'Редактировать авторизационные данные';
 require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 ?>
         <div class="subheader">
@@ -10,7 +11,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
                 <i class='subheader-icon fal fa-lock'></i><?=$title?>
             </h1>
         </div>
-        <form action="">
+        <form action="/controllers/credentials.php?id=<?=$user['id']?>" method="POST">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -19,37 +20,28 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
                                 <h2>Обновление эл. адреса и пароля</h2>
                             </div>
                             <div class="panel-content">
-                                <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="john@example.com">
+                                    <input name="email" type="text" id="simpleinput" class="form-control" value="<?= $user['email'] ?>">
                                 </div>
-
-                                <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input name="password" type="password" id="simpleinput" class="form-control">
                                 </div>
-
-                                <!-- password confirmation-->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Подтверждение пароля</label>
                                     <input type="password" id="simpleinput" class="form-control">
                                 </div>
-
-
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                                     <button class="btn btn-warning">Изменить</button>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
         </form>
     </main>
-
     <script src="js/vendors.bundle.js"></script>
     <script src="js/app.bundle.js"></script>
     <script>
