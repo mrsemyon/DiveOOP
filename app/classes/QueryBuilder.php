@@ -60,4 +60,13 @@ class QueryBuilder
         $statement = self::$pdo->prepare($sql);
         $statement->execute(array_merge($data, $where));
     }
+
+    public static function delete(string $table, array $where)
+    {
+        $sql = "DELETE FROM $table WHERE ";
+        $key = implode(array_keys($where));
+        $sql .= $key . '= :' . $key . ';';
+        $statement = self::$pdo->prepare($sql);
+        $statement->execute($where);
+    }
 }
