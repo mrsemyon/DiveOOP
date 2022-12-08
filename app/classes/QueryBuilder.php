@@ -48,7 +48,7 @@ class QueryBuilder
         return self::$pdo->lastInsertId();
     }
 
-    public function update(string $table, $data, $where)
+    public static function update(string $table, $data, $where)
     {
         $sql = "UPDATE $table SET ";
         foreach ($data as $key => $value) {
