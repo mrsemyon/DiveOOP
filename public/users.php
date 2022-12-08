@@ -29,8 +29,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 </div>
 <div class="row">
     <div class="col-xl-12">
-        <a class="btn btn-success" href="/public/create.php">Добавить</a>
-
+        <?php if (Session::get('role') == 'admin') : ?>
+            <a class="btn btn-success" href="/public/create.php">Добавить</a>
+        <?php endif ?>
         <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
             <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
             <div class="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3" data-toggle="buttons">
