@@ -14,7 +14,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 ?>
 <div class="subheader">
     <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-image'></i> Загрузить аватар
+        <i class='subheader-icon fal fa-image'></i><?= $title ?>
     </h1>
 
 </div>

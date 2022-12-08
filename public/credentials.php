@@ -17,6 +17,11 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
         <i class='subheader-icon fal fa-lock'></i><?= $title ?>
     </h1>
 </div>
+<?php if (Session::exists('danger')) : ?>
+    <div class="alert alert-danger text-dark" role="alert">
+        <?= Session::flash('danger') ?>
+    </div>
+<?php endif ?>
 <form action="/controllers/credentials.php?id=<?= $user['id'] ?>" method="POST">
     <div class="row">
         <div class="col-xl-6">
