@@ -1,6 +1,12 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+if (Session::get('role') != 'admin') {
+    Session::flash('danger', 'У Вас недостаточно прав.');
+    Redirect::to("/public/users");
+    exit;
+}
+
 if (!empty(QueryBuilder::getInstance()->read('users', ['email' => $_POST['email']]))) {
     Session::flash('danger', 'Этот эл. адрес уже занят другим пользователем.');
     Redirect::to('/public/create');

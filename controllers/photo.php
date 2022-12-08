@@ -19,8 +19,8 @@ $photo = (!empty($_FILES['photo']['name']))
 
 QueryBuilder::getInstance()->update(
     'users',
-    ['photo' => $photo],
-    ['id' =>$_GET['id']]
+    ['photo'    => $photo],
+    ['id'       => $_GET['id']]
 );
 
 Session::flash('success', 'Аватар успешно обновлён.');

@@ -4,8 +4,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 $user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
 
 if ((Session::get('role') != 'admin') && (Session::get('email') != $user['email'])) {
-    Session::flash('danger', 'У Вас недостаточно прав');
-    Redirect::to('/public/users.php');
+    Session::flash('danger', 'У Вас недостаточно прав.');
+    Redirect::to('/public/users');
     exit;
 }
 
@@ -18,7 +18,8 @@ if ($user['photo'] != 'no_photo.jpg') {
 Session::flash('success', 'Пользователь успешно удалён.');
 
 if ($user['email'] == Session::get('email')) {
-    session_destroy();
+    Session::delete('email');
+    Session::delete('role');
     Redirect::to('/public/authorization');
     exit;
 }
