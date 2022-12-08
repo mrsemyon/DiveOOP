@@ -6,7 +6,6 @@ if (Session::exists('email')) {
     Redirect::to('/public/users');
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,10 +1,15 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+if (!Session::exists('email')) {
+    Session::flash('danger', 'Необходима авторизация.');
+    Redirect::to('/public/authorization');
+    exit;
+}
+
 $users = QueryBuilder::getInstance()->read('users');
 
 $title = 'Список пользователей';
-
 require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 ?>
 <?php if (Session::exists('danger')) : ?>
