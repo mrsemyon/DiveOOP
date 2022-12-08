@@ -1,6 +1,15 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+$user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
+
+$statuses = [
+    "success"   => "Онлайн",
+    "warning"   => "Отошёл",
+    "danger"    => "Не беспокоить",
+    "unknown"   => "Не установлен",
+];
+
 $title = 'Установить статус';
 require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 ?>
@@ -10,38 +19,36 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
             </h1>
 
         </div>
-        <form action="">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div id="panel-1" class="panel">
-                        <div class="panel-container">
-                            <div class="panel-hdr">
-                                <h2>Установка текущего статуса</h2>
-                            </div>
-                            <div class="panel-content">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <!-- status -->
-                                        <div class="form-group">
-                                            <label class="form-label" for="example-select">Выберите статус</label>
-                                            <select class="form-control" id="example-select">
-                                                <option>Онлайн</option>
-                                                <option>Отошел</option>
-                                                <option>Не беспокоить</option>
-                                            </select>
-                                        </div>
+        <form action="/controllers/status.php?id=<?= $user['id'] ?>" method="POST">
+        <div class="row">
+            <div class="col-xl-6">
+                <div id="panel-1" class="panel">
+                    <div class="panel-container">
+                        <div class="panel-hdr">
+                            <h2>Установка текущего статуса</h2>
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="example-select">Выберите статус</label>
+                                        <select name="status" class="form-control" id="example-select">
+                                            <?php foreach ($statuses as $key => $value) { ?>
+                                                <option <?= ($user['status'] == $key) ? 'selected' : '' ?> value="<?= $key ?>"><?= $value ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
-                                    <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                        <button class="btn btn-warning">Set Status</button>
-                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-3 d-flex flex-row-reverse">
+                                    <button class="btn btn-warning">Установить</button>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
     </main>
 
     <script src="js/vendors.bundle.js"></script>
