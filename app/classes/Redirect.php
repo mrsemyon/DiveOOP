@@ -2,7 +2,7 @@
 
 class Redirect
 {
-    public static function to(string $location = null): void
+    public static function to(string $location, array $parameters = null): void
     {
         if ($location) {
             if (is_numeric($location)) {
@@ -14,7 +14,13 @@ class Redirect
                         break;
                 }
             }
-            header('Location:' . $location . '.php');
+            if ($parameters) {
+                $get = '?';
+                foreach ($parameters as $key => $value) {
+                    $get .= $key . '=' . $value;
+                }
+            }
+            header('Location:' . $location . '.php' . $get);
         }
     }
 }
