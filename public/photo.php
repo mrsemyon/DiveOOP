@@ -1,6 +1,8 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+$user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
+
 $title = 'Изменить фото';
 require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 ?>
@@ -10,34 +12,31 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
             </h1>
 
         </div>
-        <form action="">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div id="panel-1" class="panel">
-                        <div class="panel-container">
-                            <div class="panel-hdr">
-                                <h2>Текущий аватар</h2>
-                            </div>
-                            <div class="panel-content">
-                                <div class="form-group">
-                                    <img src="img/demo/authors/josh.png" alt="" class="img-responsive" width="200">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label" for="example-fileinput">Выберите аватар</label>
-                                    <input type="file" id="example-fileinput" class="form-control-file">
-                                </div>
-
-
-                                <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Загрузить</button>
-                                </div>
-                            </div>
+        <form action="/controllers/photo.php?id=<?= $user['id'] ?>" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-xl-6">
+            <div id="panel-1" class="panel">
+                <div class="panel-container">
+                    <div class="panel-hdr">
+                        <h2>Текущий аватар</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="form-group">
+                            <img src="/upload/<?= $user['photo'] ?>" alt="" class="img-responsive rounded-circle" width="200">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="example-fileinput">Выберите аватар</label>
+                            <input name="photo" type="file" id="example-fileinput" class="form-control-file">
+                        </div>
+                        <div class="col-md-12 mt-3 d-flex flex-row-reverse">
+                            <button class="btn btn-warning">Загрузить</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </div>
+</form>
     </main>
 
     <script src="js/vendors.bundle.js"></script>
