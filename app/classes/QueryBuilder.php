@@ -48,7 +48,7 @@ class QueryBuilder
         return self::$pdo->lastInsertId();
     }
 
-    public function update(string $table, $data, $where)
+    public static function update(string $table, $data, $where)
     {
         $sql = "UPDATE $table SET ";
         foreach ($data as $key => $value) {
@@ -59,5 +59,14 @@ class QueryBuilder
         $sql .= $key . '= :' . $key . ';';
         $statement = self::$pdo->prepare($sql);
         $statement->execute(array_merge($data, $where));
+    }
+
+    public static function delete(string $table, array $where)
+    {
+        $sql = "DELETE FROM $table WHERE ";
+        $key = implode(array_keys($where));
+        $sql .= $key . '= :' . $key . ';';
+        $statement = self::$pdo->prepare($sql);
+        $statement->execute($where);
     }
 }

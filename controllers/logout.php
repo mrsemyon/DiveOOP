@@ -1,7 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
-Session::delete('email', $_POST['email']);
-Session::delete('role', 'user');
+Session::delete('email');
+Session::delete('role');
 
 Redirect::to('/public/authorization');

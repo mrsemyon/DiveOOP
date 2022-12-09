@@ -2,13 +2,12 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
 if (Session::get('role') != 'admin') {
-    Session::flash('danger', 'У Вас недостаточно прав');
-    Redirect::to("/public/create");
+    Session::flash('danger', 'У Вас недостаточно прав.');
+    Redirect::to("/public/users");
     exit;
 }
 
 $title = 'Добавить пользователя';
-
 require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 ?>
 <div class="subheader">

@@ -1,10 +1,15 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+if (!Session::exists('email')) {
+    Session::flash('danger', 'Необходима авторизация.');
+    Redirect::to('/public/authorization');
+    exit;
+}
+
 $users = QueryBuilder::getInstance()->read('users');
 
 $title = 'Список пользователей';
-
 require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 ?>
 <?php if (Session::exists('danger')) : ?>
@@ -24,8 +29,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
 </div>
 <div class="row">
     <div class="col-xl-12">
-        <a class="btn btn-success" href="/public/create.php">Добавить</a>
-
+        <?php if (Session::get('role') == 'admin') : ?>
+            <a class="btn btn-success" href="/public/create.php">Добавить</a>
+        <?php endif ?>
         <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
             <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
             <div class="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3" data-toggle="buttons">
@@ -66,7 +72,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
                                 <a class="dropdown-item" href="/public/status.php?id=<?= $user['id'] ?>">
                                     <i class="fa fa-sun"></i>
                                     Установить статус</a>
-                                <a class="dropdown-item" href="/public/media.php?id=<?= $user['id'] ?>">
+                                <a class="dropdown-item" href="/public/photo.php?id=<?= $user['id'] ?>">
                                     <i class="fa fa-camera"></i>
                                     Загрузить аватар
                                 </a>
