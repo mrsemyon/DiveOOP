@@ -1,7 +1,13 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
-$user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
+if (Input::exists('get')) {
+    $user = QueryBuilder::getInstance()->read('users', ['id' => Input::get('id')]);
+} else {
+    Session::flash('danger', 'Внутренняя ошибка сервера.');
+    Redirect::to('/public/users');
+    exit;
+}
 
 if ((Session::get('role') != 'admin') && (Session::get('email') != $user['email'])) {
     Session::flash('danger', 'У Вас недостаточно прав.');
@@ -20,7 +26,7 @@ $photo = (!empty($_FILES['photo']['name']))
 QueryBuilder::getInstance()->update(
     'users',
     ['photo'    => $photo],
-    ['id'       => $_GET['id']]
+    ['id'       => Input::get('id')]
 );
 
 Session::flash('success', 'Аватар успешно обновлён.');

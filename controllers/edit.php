@@ -1,7 +1,13 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
-$user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
+if (Input::exists('get')) {
+    $user = QueryBuilder::getInstance()->read('users', ['id' => Input::get('id')]);
+} else {
+    Session::flash('danger', 'Внутренняя ошибка сервера.');
+    Redirect::to('/public/users');
+    exit;
+}
 
 if ((Session::get('role') != 'admin') && (Session::get('email') != $user['email'])) {
     Session::flash('danger', 'У Вас недостаточно прав.');
@@ -12,12 +18,12 @@ if ((Session::get('role') != 'admin') && (Session::get('email') != $user['email'
 QueryBuilder::getInstance()->update(
     'users',
     [
-        'name'      => $_POST['name'],
-        'position'  => $_POST['position'],
-        'address'   => $_POST['address'],
-        'phone'     => $_POST['phone']
+        'name'      => Input::get('name'),
+        'position'  => Input::get('position'),
+        'address'   => Input::get('address'),
+        'phone'     => Input::get('phone')
     ],
-    ['id' => $_GET['id']]
+    ['id' => Input::get('id')]
 );
 
 Session::flash('success', 'Информация успешно обновлена.');

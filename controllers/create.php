@@ -7,7 +7,7 @@ if (Session::get('role') != 'admin') {
     exit;
 }
 
-if (!empty(QueryBuilder::getInstance()->read('users', ['email' => $_POST['email']]))) {
+if (!empty(QueryBuilder::getInstance()->read('users', ['email' => Input::get('email')]))) {
     Session::flash('danger', 'Этот эл. адрес уже занят другим пользователем.');
     Redirect::to('/public/create');
     exit;
@@ -16,8 +16,8 @@ if (!empty(QueryBuilder::getInstance()->read('users', ['email' => $_POST['email'
 $id = QueryBuilder::getInstance()->create(
     'users',
     [
-        'email'     => $_POST['email'],
-        'password'  => password_hash($_POST['password'], PASSWORD_DEFAULT),
+        'email'     => Input::get('email'),
+        'password'  => password_hash(Input::get('password'), PASSWORD_DEFAULT),
         'role'      => 'user',
     ]
 );
@@ -29,15 +29,15 @@ $photo = (!empty($_FILES['photo']['name']))
 QueryBuilder::getInstance()->update(
     'users',
     [
-        'name'      => $_POST['name'],
-        'position'  => $_POST['position'],
-        'phone'     => $_POST['phone'],
-        'address'   => $_POST['address'],
-        'status'    => $_POST['status'],
-        'photo'     => $photo,
-        'vk'        => $_POST['vk'],
-        'tg'        => $_POST['tg'],
-        'ig'        => $_POST['ig']
+        'name'      => Input::get('name'),
+        'position'  => Input::get('position'),
+        'phone'     => Input::get('phone'),
+        'address'   => Input::get('address'),
+        'status'    => Input::get('status'),
+        'vk'        => Input::get('vk'),
+        'tg'        => Input::get('tg'),
+        'ig'        => Input::get('ig'),
+        'photo'     => $photo
     ],
     ['id' => $id]
 );

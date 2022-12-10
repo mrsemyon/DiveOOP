@@ -1,7 +1,13 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
-$user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
+if (Input::exists('get')) {
+    $user = QueryBuilder::getInstance()->read('users', ['id' => Input::get('id')]);
+} else {
+    Session::flash('danger', 'Внутренняя ошибка сервера.');
+    Redirect::to('/public/users');
+    exit;
+}
 
 if ((Session::get('role') != 'admin') && (Session::get('email') != $user['email'])) {
     Session::flash('danger', 'У Вас недостаточно прав.');
@@ -9,21 +15,21 @@ if ((Session::get('role') != 'admin') && (Session::get('email') != $user['email'
     exit;
 }
 
-if (empty($_POST['email'])) {
+if (empty(Input::get('email'))) {
     Session::flash('danger', 'Поле Email не может быть пустым.');
     Redirect::to('/public/credentials', ['id' => $user['id']]);
     exit;
 }
 
-if ($user['email'] != $_POST['email']) {
-    if (empty(QueryBuilder::getInstance()->read('users', ['email' => $_POST['email']]))) {
+if ($user['email'] != Input::get('email')) {
+    if (empty(QueryBuilder::getInstance()->read('users', ['email' => Input::get('email')]))) {
         QueryBuilder::getInstance()->update(
             'users',
-            ['email' => $_POST['email']],
-            ['id' => $_GET['id']]
+            ['email' => Input::get('email')],
+            ['id' => Input::get('id')]
         );
         if (Session::get('role') != 'admin') {
-            Session::put('email', $_POST['email']);
+            Session::put('email', Input::get('email'));
         }
         Session::flash('success', 'Регистрационные данные были обновлены.');
     } else {
@@ -33,11 +39,11 @@ if ($user['email'] != $_POST['email']) {
     }
 }
 
-if (!empty($_POST['password'])) {
+if (!empty(Input::get('password'))) {
     QueryBuilder::getInstance()->update(
         'users',
-        ['password' => password_hash($_POST['password'], PASSWORD_DEFAULT)],
-        ['id' => $_GET['id']]
+        ['password' => password_hash(Input::get('password'), PASSWORD_DEFAULT)],
+        ['id' => Input::get('id')]
     );
     Session::put('success', 'Регистрационные данные были обновлены.');
 }
