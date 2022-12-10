@@ -22,10 +22,6 @@ $id = QueryBuilder::getInstance()->create(
     ]
 );
 
-$photo = (!empty($_FILES['photo']['name']))
-    ? prepareUserPhoto($_FILES['photo'])
-    : 'no_photo.png';
-
 QueryBuilder::getInstance()->update(
     'users',
     [
@@ -37,7 +33,7 @@ QueryBuilder::getInstance()->update(
         'vk'        => Input::get('vk'),
         'tg'        => Input::get('tg'),
         'ig'        => Input::get('ig'),
-        'photo'     => $photo
+        'photo'     => prepareUserPhoto($_FILES['photo'])
     ],
     ['id' => $id]
 );

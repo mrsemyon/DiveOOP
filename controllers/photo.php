@@ -19,13 +19,9 @@ if ($user['photo'] != 'no_photo.jpg') {
     unlink($_SERVER['DOCUMENT_ROOT'] . '/upload/' . $user['photo']);
 }
 
-$photo = (!empty($_FILES['photo']['name']))
-    ? prepareUserPhoto($_FILES['photo'])
-    : 'no_photo.jpg';
-
 QueryBuilder::getInstance()->update(
     'users',
-    ['photo'    => $photo],
+    ['photo'    => prepareUserPhoto($_FILES['photo'])],
     ['id'       => Input::get('id')]
 );
 
