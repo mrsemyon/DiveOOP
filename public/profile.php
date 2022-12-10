@@ -7,13 +7,13 @@ if (!Session::exists('email')) {
     exit;
 }
 
-if (empty($_GET)) {
+if (Input::exists('get')) {
+    $user = QueryBuilder::getInstance()->read('users', ['id' => Input::get('id')]);
+} else {
     Session::flash('danger', 'Не выбран пользователь.');
     Redirect::to('/public/users');
     exit;
 }
-
-$user = QueryBuilder::getInstance()->read('users', ['id' => $_GET['id']]);
 
 $title = 'Профиль пользователя';
 require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
