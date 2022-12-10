@@ -30,7 +30,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
             <div class="row no-gutters row-grid">
                 <div class="col-12">
                     <div class="d-flex flex-column align-items-center justify-content-center p-4">
-                        <img src="img/demo/avatars/avatar-admin-lg.png" class="rounded-circle shadow-2 img-thumbnail" alt="">
+                        <img src="img/demo/avatars/<?= $user['photo'] ?>" class="rounded-circle shadow-2 img-thumbnail" alt="">
                         <h5 class="mb-0 fw-700 text-center mt-3">
                             <?= $user['name'] ?>
                             <small class="text-muted mb-0"><?= $user['position'] ?></small>
@@ -50,9 +50,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
                 </div>
                 <div class="col-12">
                     <div class="p-3 text-center">
-                        <a href="tel:+13174562564" class="mt-1 d-block fs-sm fw-400 text-dark">
+                        <a href="tel:<?= $user['phone'] ?>" class="mt-1 d-block fs-sm fw-400 text-dark">
                             <i class="fas fa-mobile-alt text-muted mr-2"></i><?= $user['phone'] ?></a>
-                        <a href="mailto:oliver.kopyov@marlin.ru" class="mt-1 d-block fs-sm fw-400 text-dark">
+                        <a href="mailto:<?= $user['email'] ?>" class="mt-1 d-block fs-sm fw-400 text-dark">
                             <i class="fas fa-mouse-pointer text-muted mr-2"></i><?= $user['email'] ?></a>
                         <address class="fs-sm fw-400 mt-4 text-muted">
                             <i class="fas fa-map-pin mr-2"></i><?= $user['address'] ?>
