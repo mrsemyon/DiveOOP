@@ -1,6 +1,12 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+if (!Token::check(Input::get('token'))) {
+    Session::flash('danger', 'Что-то пошло не так.');
+    Redirect::to('/public/authorization');
+    exit;
+}
+
 $user = QueryBuilder::getInstance()->read('users', ['email' => Input::get('email')]);
 
 if (!empty($user) && password_verify(Input::get('password'), $user['password'])) {

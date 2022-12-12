@@ -25,7 +25,7 @@ if (Session::exists('email')) {
     <!-- base css -->
     <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="css/vendors.bundle.css">
     <link id="appbundle" rel="stylesheet" media="screen, print" href="css/app.bundle.css">
-    <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
+    <!--link id="mytheme" rel="stylesheet" media="screen, print" href="#"-->
     <link id="myskin" rel="stylesheet" media="screen, print" href="css/skins/skin-master.css">
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -65,10 +65,12 @@ if (Session::exists('email')) {
                     </div>
                 </div>
                 <button type="submit" class="btn btn-default float-right">Войти</button>
+                <input type="hidden" name="token" value="<?= Token::generate() ?>">
             </form>
         </div>
         <div class="blankpage-footer text-center">
-            Нет аккаунта? <a href="/public/registration.php"><strong>Зарегистрироваться</strong>
+            Нет аккаунта?
+            <a href="/public/registration.php"><strong>Зарегистрироваться</strong></a>
         </div>
     </div>
     <video poster="img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
