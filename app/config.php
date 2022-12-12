@@ -13,4 +13,12 @@ $config = [
             PDO::ATTR_EMULATE_PREPARES   => false,
         ],
     ],
+    'session'   => [
+        'tokenName'     => 'token',
+        'userSession'   => 'user',
+    ],
+    'cookie'    => [
+        'cookieName'    => 'hash',
+        'cookieExpiry'  => 604800,
+    ]
 ];
