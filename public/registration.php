@@ -25,7 +25,7 @@ if (Session::exists('email')) {
     <!-- base css -->
     <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="css/vendors.bundle.css">
     <link id="appbundle" rel="stylesheet" media="screen, print" href="css/app.bundle.css">
-    <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
+    <!--link id="mytheme" rel="stylesheet" media="screen, print" href="#"-->
     <link id="myskin" rel="stylesheet" media="screen, print" href="css/skins/skin-master.css">
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -98,7 +98,7 @@ if (Session::exists('email')) {
                                                 <button id="js-login-btn" type="submit" class="btn btn-block btn-danger btn-lg mt-3">Регистрация</button>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="token">
+                                        <input type="hidden" name="token" value="<?= Token::generate() ?>">
                                     </form>
                                 </div>
                             </div>

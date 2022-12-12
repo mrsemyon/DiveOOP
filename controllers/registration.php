@@ -1,6 +1,12 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+if (!Token::check(Input::get('token'))) {
+    Session::flash('danger', 'Что-то пошло не так.');
+    Redirect::to('/public/registration');
+    exit;
+}
+
 if (!empty(QueryBuilder::getInstance()->read('users', ['email' => Input::get('email')]))) {
     Session::flash('danger', 'Этот эл. адрес уже занят другим пользователем.');
     Redirect::to('/public/registration');
