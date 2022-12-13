@@ -43,6 +43,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/public/templates/header.php';
                         <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                             <button class="btn btn-warning">Загрузить</button>
                         </div>
+                        <input type="hidden" name="token" value="<?= Token::generate() ?>">
                     </div>
                 </div>
             </div>
