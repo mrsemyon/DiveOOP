@@ -27,7 +27,7 @@ if ($user['photo'] != 'no_photo.jpg') {
 
 QueryBuilder::getInstance()->update(
     'users',
-    ['photo'    => prepareUserPhoto($_FILES['photo'])],
+    ['photo'    => Photo::prepare($_FILES['photo'])],
     ['id'       => Input::get('id')]
 );
 

@@ -39,7 +39,7 @@ QueryBuilder::getInstance()->update(
         'vk'        => Input::get('vk'),
         'tg'        => Input::get('tg'),
         'ig'        => Input::get('ig'),
-        'photo'     => prepareUserPhoto($_FILES['photo'])
+        'photo'     => Photo::prepare($_FILES['photo'])
     ],
     ['id' => $id]
 );
