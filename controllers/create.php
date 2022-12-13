@@ -1,6 +1,12 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+if (!Token::check(Input::get('token'))) {
+    Session::flash('danger', 'Что-то пошло не так.');
+    Redirect::to('/public/registration');
+    exit;
+}
+
 if (Session::get('role') != 'admin') {
     Session::flash('danger', 'У Вас недостаточно прав.');
     Redirect::to("/public/users");

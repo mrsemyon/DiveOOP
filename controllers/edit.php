@@ -1,6 +1,12 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/app/init.php';
 
+if (!Token::check(Input::get('token'))) {
+    Session::flash('danger', 'Что-то пошло не так.');
+    Redirect::to('/public/registration');
+    exit;
+}
+
 if (Input::exists('get')) {
     $user = QueryBuilder::getInstance()->read('users', ['id' => Input::get('id')]);
 } else {
