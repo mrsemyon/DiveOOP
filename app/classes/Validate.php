@@ -18,33 +18,32 @@ class Validate
                 $value = $source[$item];
 
                 if ($rule == 'required' && empty($value)) {
-                    $this->addError("{$item} is required\n");
+                    $this->addError("{$item} is required");
                 } else {
                     switch ($rule) {
                         case 'min':
                             if (strlen($value) < $ruleValue) {
-                                $this->addError("The {$item} must be at least {$ruleValue} characters\n");
+                                $this->addError("The {$item} must be at least {$ruleValue} characters");
                             }
                             break;
                         case 'max':
                             if (strlen($value) > $ruleValue) {
-                                $this->addError("The {$item} must be no more than {$ruleValue} characters\n");
+                                $this->addError("The {$item} must be no more than {$ruleValue} characters");
                             }
                             break;
                         case 'matches':
                             if ($value != $source[$ruleValue]) {
-                                $this->addError("The {$item} must match {$ruleValue}\n");
+                                $this->addError("The {$item} must match {$ruleValue}");
                             }
                             break;
                         case 'unique':
-                            $check = $this->db->read($ruleValue, [$item, '=', $value]);
-                            if ($check->count()) {
-                                $this->addError("The {$item} alredy exists\n");
+                            if ($this->db->read($ruleValue, [$item => $value])) {
+                                $this->addError("The {$item} alredy exists");
                             }
                             break;
                         case 'email':
                             if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                                $this->addError("The {$item} must be valid email\n");
+                                $this->addError("The {$item} must be valid email");
                             }
                     }
                 }
